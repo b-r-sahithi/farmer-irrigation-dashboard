@@ -1,4 +1,4 @@
-# 🌱 Farmer Irrigation Decision Support System using NASA POWER Data
+# 🌱 Farmer Friendly Data Visualization Dashboard using NASA POWER Data
 
 ## 📌 Project Overview
 This project is a **farmer-friendly irrigation decision support system** that uses **NASA POWER climatic data** to analyze rainfall and evapotranspiration trends and provide **actionable irrigation guidance**.
@@ -17,6 +17,7 @@ The goal is to help farmers **understand climate data and act accordingly**.
 - Compute a scientifically defined **Irrigation Deficit Index (IDI)**
 - Categorize irrigation need into **three understandable levels**
 - Estimate irrigation risk using a trained Machine Learning model
+- Estimate **crop health (NDVI)** dynamically based on environmental stress
 - Provide an interactive, farmer-friendly web dashboard
 
 ---
@@ -29,7 +30,9 @@ The goal is to help farmers **understand climate data and act accordingly**.
   - Rainfall (PRECTOTCORR)
   - Evapotranspiration (EVPTRNS)
 - Regions: Mandya, Raichur, Tumakuru, Anantapur, Warangal
-- Years: 2019 – 2024
+- Data is fetched dynamically based on:
+  - Farm location (latitude & longitude)
+  - Selected date range
 
 ---
 
@@ -58,7 +61,18 @@ This ensures **explainability and trust** for farmers.
 
 ---
 
-### 4️⃣ Machine Learning Model
+### 4️⃣ NDVI (Crop Health Estimation)
+- NDVI is estimated dynamically based on recent irrigation stress:
+  - High water stress → Lower NDVI
+  - Adequate water → Higher NDVI
+- Output:
+  - Probability of irrigation requirement (risk %)
+
+> Direct satellite NDVI integration is planned as future work.
+
+---
+
+### 5️⃣ Machine Learning Model
 - Model: **Random Forest Classifier**
 - Inputs:
   - Rainfall
@@ -70,7 +84,7 @@ This ensures **explainability and trust** for farmers.
 
 ---
 
-### 5️⃣ Dataset Generation & Training
+###  Dataset Generation & Training
 - Auto-generated ~10,900 samples using NASA POWER
 - Labels created using IDI thresholds (weak supervision)
 - Class imbalance handled using `class_weight="balanced"`
@@ -91,11 +105,13 @@ This ensures **explainability and trust** for farmers.
 
 ## 📊 Features
 - Interactive map-based farm selection
+- Custom date range selection
 - Seasonal irrigation analysis
 - Farmer-friendly alert banners
-- Risk percentage (0–100%)
+- Clear irrigation advisory (Green/Yellow/Red)
+- Crop health status(NDVI)
 - Time-series visualizations
-- Supports negative IDI (rainfall surplus)
+- Farmer-friendly language and visuals
 
 ---
 
@@ -109,8 +125,18 @@ This ensures **explainability and trust** for farmers.
 
 ---
 
+## 🔮 Future Enhancements
+- Direct satellite NDVI integration (Sentinel-2 / MODIS)
+- Crop-specific irrigation thresholds
+- Mobile application for farmers
+- Multilingual support (local languages)
+-Automated report download (PDF)
+
+---
+
 ## ▶️ How to Run the Project
 
 ### 1️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
+
